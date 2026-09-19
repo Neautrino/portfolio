@@ -1,3 +1,4 @@
+import { Experience } from './components/Experience';
 import { FeaturedWork } from './components/FeaturedWork';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
@@ -9,6 +10,7 @@ export default function App() {
       <main className="mx-auto max-w-page px-6 pb-14">
         <Hero />
         <FeaturedWork />
+        <Experience />
       </main>
     </div>
   );

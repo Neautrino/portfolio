@@ -9,11 +9,13 @@ export interface SkillGroup {
 }
 
 export interface ExperienceEntry {
+  company: string;
   role: string;
-  org: string;
   period: string;
-  summary: string;
-  highlights?: string[];
+  location: string;
+  engagement: string;
+  highlights: string[];
+  stack: string[];
 }
 
 export type ProjectStatus = 'shipped' | 'building' | 'archived';
@@ -45,5 +47,4 @@ export interface Profile {
   bio: string[];
   socials: Social[];
   skills: SkillGroup[];
-  experience?: ExperienceEntry[];
 }
