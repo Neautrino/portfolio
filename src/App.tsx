@@ -1,3 +1,4 @@
+import { About } from './components/About';
 import { Experience } from './components/Experience';
 import { FeaturedWork } from './components/FeaturedWork';
 import { Header } from './components/Header';
@@ -11,6 +12,7 @@ export default function App() {
         <Hero />
         <FeaturedWork />
         <Experience />
+        <About />
       </main>
     </div>
   );
