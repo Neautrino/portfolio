@@ -59,7 +59,7 @@ export function Hero() {
             </span>
           </div>
 
-          <div className="min-h-48 p-5 sm:min-h-62 sm:px-[26px] sm:pt-[26px] sm:pb-[18px]">
+          <div className="p-5 sm:px-[26px] sm:pt-[26px] sm:pb-[18px]">
             <p className="flex flex-wrap gap-x-2 font-mono text-xs tracking-[0.02em]">
               <span>
                 <span className="text-accent">{HOST}</span>
@@ -84,13 +84,14 @@ export function Hero() {
               </span>
             </h1>
 
-            <p className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">
-              {profile.role} · {profile.location}
-            </p>
-
-            <p className="mt-5 border-t border-border pt-[13px] font-mono text-[10.5px] tracking-[0.1em] text-muted tabular-nums">
-              <span className="text-accent-2">exit: 0</span> · 4 projects · 0 posts
-            </p>
+            <div className="mt-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-border pt-[13px]">
+              <p className="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">
+                {profile.role} · {profile.location}
+              </p>
+              <p className="font-mono text-[10.5px] tracking-[0.1em] text-accent-2 tabular-nums">
+                exit: 0
+              </p>
+            </div>
           </div>
         </div>
 
