@@ -16,15 +16,22 @@ export interface ExperienceEntry {
   highlights?: string[];
 }
 
+export type ProjectStatus = 'shipped' | 'building' | 'archived';
+
 export interface Project {
   slug: string;
   title: string;
   tagline: string;
-  summary: string;
+  date: string;
+  status: ProjectStatus;
+  highlights: string[];
   stack: string[];
   liveUrl?: string;
   repoUrl?: string;
-  featured?: boolean;
+  featured: boolean;
+  order: number;
+  /** markdown body, already rendered to HTML at build time */
+  body: string;
 }
 
 export interface Profile {

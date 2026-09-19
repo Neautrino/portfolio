@@ -17,7 +17,7 @@
   --font-body: "Inter", system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
 
-  --container-page: 1100px;
+  --container-page: 900px;
   --container-measure: 900px;
 
   --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
