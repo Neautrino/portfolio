@@ -3,7 +3,7 @@ import type { Profile } from './types';
 export const profile: Profile = {
   name: 'Subhendu Singh',
   role: 'Software Engineer',
-  location: 'Kolkata, India',
+  location: 'India',
   email: 'ssubhendu988@gmail.com',
   resumeUrl: '/resume.pdf',
   availability: 'Open to interesting backend, systems, full-stack, web3, and AI conversations.',
