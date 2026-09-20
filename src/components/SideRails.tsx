@@ -65,7 +65,7 @@ export function SideRails() {
             );
           })}
         </ul>
-        <div className="h-40 w-px bg-border" />
+        <div className="h-20 w-px bg-border" />
       </aside>
 
       {/* Bottom-Right Rail: Rotated email text + vertical line to bottom */}
@@ -79,7 +79,7 @@ export function SideRails() {
         >
           {profile.email}
         </a>
-        <div className="h-40 w-px bg-border" />
+        <div className="h-20 w-px bg-border" />
       </aside>
     </>
   );
