@@ -312,3 +312,71 @@
     animation: none;
   }
 }
+/* Authentic Solari split-flap mechanics.
+
+   A physical flap is ONE leaf hinged at the centre seam, carrying the
+   outgoing digit's top half on its front and the incoming digit's bottom
+   half on its back. It sweeps a single continuous 0deg -> -180deg arc.
+
+   Modelling this as two separate leaves (fold 0->-90, then reveal 90->0)
+   splits one motion into two independently-timed animations, which reads
+   as a stutter at the seam. One leaf, one keyframe, constant arc. */
+
+.sf-leaf {
+  transform-style: preserve-3d;
+  transform-origin: bottom; /* the centre seam */
+  animation: sf-spin var(--sf-dur) cubic-bezier(0.55, 0, 0.75, 0.35) forwards;
+}
+
+@keyframes sf-spin {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(-180deg);
+  }
+}
+
+.sf-face {
+  backface-visibility: hidden;
+}
+
+/* Back face is glued to the front, reading upright once the leaf lands. */
+.sf-face-back {
+  transform: rotateX(180deg);
+}
+
+/* Light travelling across the leaf as it sweeps through the arc. */
+.sf-face-front {
+  animation: sf-shade-out var(--sf-dur) linear forwards;
+}
+
+.sf-face-back {
+  animation: sf-shade-in var(--sf-dur) linear forwards;
+}
+
+@keyframes sf-shade-out {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(0.28);
+  }
+}
+
+@keyframes sf-shade-in {
+  from {
+    filter: brightness(0.28);
+  }
+  to {
+    filter: brightness(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-leaf,
+  .sf-face-front,
+  .sf-face-back {
+    animation: none;
+  }
+}
