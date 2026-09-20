@@ -122,19 +122,6 @@ export function Contact() {
           </li>
         </ul>
 
-        {/* Closing Stamp: Visitor Badge + Copyright */}
-        <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
-          <img
-            src="https://hits.sh/github.com/neautrino.svg?style=flat-square&label=visitors&color=6b7280&labelColor=44403c"
-            alt="Unique visitors counter"
-            width={68}
-            height={20}
-            className="opacity-80"
-          />
-          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-dim">
-            © {currentYear} NEAUTRINO. ALL RIGHTS RESERVED.
-          </p>
-        </div>
       </div>
     </Section>
   );
