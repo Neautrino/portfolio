@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { CatPeek } from './CatPeek';
 import { profile } from '../content/profile';
 
 const HOST = 'neautrino@localhost';
@@ -44,7 +45,7 @@ export function Hero() {
           Hi, my name is
         </p>
 
-        <div className="overflow-clip rounded-sm border border-border-strong bg-surface text-left">
+        <div className="relative overflow-clip rounded-sm border border-border-strong bg-surface text-left">
           <div className="flex items-center gap-3.5 border-b border-border-strong bg-surface-2 px-4 py-2.5">
             <div className="flex flex-none items-center gap-3.5" aria-hidden="true">
               <RegMark keyPlate />
@@ -93,6 +94,7 @@ export function Hero() {
               </p>
             </div>
           </div>
+          <CatPeek />
         </div>
 
         <p className="mx-auto mt-9 max-w-[60ch] font-display text-[clamp(1.2rem,2.4vw,1.45rem)] leading-[1.56] font-normal text-pretty text-muted">
