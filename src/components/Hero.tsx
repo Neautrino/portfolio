@@ -41,7 +41,7 @@ export function Hero() {
   return (
     <section id="top" className="dot-grid scroll-mt-24 pt-[136px] pb-[76px]">
       <div className="relative z-1 mx-auto max-w-measure text-center">
-        <p className="mb-[18px] pl-[19px] text-left font-mono text-xs tracking-[0.14em] text-accent sm:pl-[27px]">
+        <p className="heroEyebrow mb-[18px] pl-[19px] text-left font-mono text-xs tracking-[0.14em] text-accent sm:pl-[27px]">
           Hi, my name is
         </p>
 

@@ -159,3 +159,100 @@
     transform: none;
   }
 }
+
+/* Sleeping cat: footer counterpart to the running oneko cat that chases
+   the cursor — same sprite sheet, same character, standing still for once.
+   --cat-px is the only size knob; the sheet is an 8x4 grid of square cells. */
+.sleeping-cat {
+  --cat-px: 72px;
+  width: var(--cat-px);
+  height: var(--cat-px);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sleeping-cat-sprite {
+  position: absolute;
+  inset: 0;
+  background-image: url("/oneko.gif");
+  background-repeat: no-repeat;
+  background-size: calc(var(--cat-px) * 8) calc(var(--cat-px) * 4);
+  background-position: calc(var(--cat-px) * -2) 0;
+  image-rendering: pixelated;
+  animation: sleeping-cat-breathe 1.4s steps(1, end) infinite;
+}
+
+@keyframes sleeping-cat-breathe {
+  0%,
+  49.99% {
+    background-position: calc(var(--cat-px) * -2) 0;
+  }
+  50%,
+  100% {
+    background-position: calc(var(--cat-px) * -2) calc(var(--cat-px) * -1);
+  }
+}
+
+/* Three z's on one animation, phase-offset by negative delays so they are
+   mid-flight on first paint instead of launching in a synchronised burst. */
+.sleeping-cat-zee {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-muted);
+  opacity: 0.55;
+  animation: sleeping-cat-zee-drift 5.7s linear infinite;
+}
+
+.sleeping-cat-zee-1 {
+  top: 2px;
+  left: 46px;
+  font-size: 17px;
+  animation-delay: 0s;
+}
+
+.sleeping-cat-zee-2 {
+  top: 10px;
+  left: 39px;
+  font-size: 13px;
+  animation-delay: -1.9s;
+}
+
+.sleeping-cat-zee-3 {
+  top: 17px;
+  left: 33px;
+  font-size: 9px;
+  animation-delay: -3.8s;
+}
+
+@keyframes sleeping-cat-zee-drift {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(8deg);
+  }
+  30% {
+    opacity: 0.8;
+  }
+  60% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(18px, -33px) rotate(18deg);
+  }
+}
+
+/* Dream bubble, anchored above the cat so it opens into the page. */
+.sleeping-cat-dream {
+  transform-origin: bottom right;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sleeping-cat-sprite,
+  .sleeping-cat-zee {
+    animation: none;
+  }
+}

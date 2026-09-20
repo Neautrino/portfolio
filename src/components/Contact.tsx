@@ -1,6 +1,6 @@
 import { profile } from '../content/profile';
 import { Section } from './Section';
-
+import { SleepingCat } from './SleepingCat';
 
 function GitBranchIcon() {
   return (
@@ -60,8 +60,6 @@ function TagIcon() {
 }
 
 export function Contact() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <Section id="contact" num="04" title="Contact">
       <div className="flex w-full flex-col">
@@ -121,6 +119,9 @@ export function Contact() {
             </a>
           </li>
         </ul>
+
+        {/* Sleeping cat, right above the footer's divider line */}
+        <SleepingCat className="relative mt-10 self-end" />
 
       </div>
     </Section>

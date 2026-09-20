@@ -5,6 +5,7 @@ import { FeaturedWork } from './components/FeaturedWork';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
+import { RunningCat } from './components/RunningCat';
 import { SideRails } from './components/SideRails';
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <RunningCat />
     </div>
   );
 }
