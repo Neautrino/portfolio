@@ -14,10 +14,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="min-h-screen overflow-x-clip bg-bg text-text selection:bg-accent selection:text-accent-contrast">
+      <div className="flex min-h-screen flex-col overflow-x-clip bg-bg text-text selection:bg-accent selection:text-accent-contrast">
         <Header />
         <SideRails />
-        <main className="mx-auto max-w-page px-6 pb-14">
+        <main className="mx-auto w-full max-w-page flex-1 px-6 pb-14">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/blog" element={<Blog />} />
