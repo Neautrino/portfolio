@@ -64,6 +64,62 @@
   }
 }
 
+/* Rendered markdown body for project detail pages (marked output: h2, p,
+   strong, code, a, ul/li — no classes to hook, style the raw tags). */
+@utility project-prose {
+  max-width: 68ch;
+  color: var(--color-muted);
+  font-size: 1.04rem;
+  line-height: 1.75;
+
+  & h2 {
+    margin-top: 2.2em;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  & h2:first-child {
+    margin-top: 0;
+  }
+
+  & p {
+    margin-top: 1em;
+  }
+
+  & strong {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  & code {
+    border-radius: 3px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-2);
+    padding: 0.15em 0.4em;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--color-accent-2);
+  }
+
+  & a {
+    color: var(--color-accent);
+    text-decoration-color: var(--color-border-strong);
+    text-underline-offset: 3px;
+  }
+
+  & ul,
+  & ol {
+    margin-top: 1em;
+    padding-left: 1.3em;
+  }
+
+  & li + li {
+    margin-top: 0.4em;
+  }
+}
+
 /* Cat entrance:
    1. Paw 1 reaches up slowly from below, arcs OVER the table edge, and plants down (clamping the ledge).
    2. Paw 2 follows ~200ms later with the same reaching arc and plants down.

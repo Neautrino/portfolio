@@ -30,6 +30,10 @@ export interface Project {
   stack: string[];
   liveUrl?: string;
   repoUrl?: string;
+  /** hero banner shown on the project detail page, e.g. "/projects/cerebro.png" */
+  image?: string;
+  /** required alongside `image`; describes the screenshot for assistive tech */
+  imageAlt?: string;
   featured: boolean;
   order: number;
   /** markdown body, already rendered to HTML at build time */

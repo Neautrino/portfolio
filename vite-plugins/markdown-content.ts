@@ -36,6 +36,8 @@ const PROJECT_RULES: Rule[] = [
   { key: 'order', check: (v) => typeof v === 'number', expected: 'a number' },
   { key: 'liveUrl', check: str, expected: 'a URL string', optional: true },
   { key: 'repoUrl', check: str, expected: 'a URL string', optional: true },
+  { key: 'image', check: str, expected: 'a path string, e.g. "/projects/cerebro.png"', optional: true },
+  { key: 'imageAlt', check: str, expected: 'a non-empty string', optional: true },
 ];
 
 function validate(data: Record<string, unknown>, rules: Rule[], file: string) {
@@ -68,6 +70,9 @@ export function markdownContent(): Plugin {
       const { data, content } = matter(code);
       const error = validate(data, PROJECT_RULES, file);
       if (error) this.error(error);
+      if (data.image && !data.imageAlt) {
+        this.error(`${file}: "image" is set but "imageAlt" is missing — required for assistive tech`);
+      }
 
       const module = {
         slug: file.replace(/\.md$/, ''),

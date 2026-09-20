@@ -1,27 +1,32 @@
-import { About } from './components/About';
-import { Contact } from './components/Contact';
-import { Experience } from './components/Experience';
-import { FeaturedWork } from './components/FeaturedWork';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
-import { Hero } from './components/Hero';
 import { RunningCat } from './components/RunningCat';
+import { ScrollToTop } from './components/ScrollToTop';
 import { SideRails } from './components/SideRails';
+import { Home } from './pages/Home';
+import { NotFound } from './pages/NotFound';
+import { ProjectDetail } from './pages/ProjectDetail';
+import { Projects } from './pages/Projects';
 
 export default function App() {
   return (
-    <div className="min-h-screen overflow-x-clip bg-bg text-text selection:bg-accent selection:text-accent-contrast">
-      <Header />
-      <SideRails />
-      <main className="mx-auto max-w-page px-6 pb-14">
-        <Hero />
-        <FeaturedWork />
-        <Experience />
-        <About />
-        <Contact />
-      </main>
-      <Footer />
-      <RunningCat />
-    </div>
+    <BrowserRouter>
+      <ScrollToTop />
+      <div className="min-h-screen overflow-x-clip bg-bg text-text selection:bg-accent selection:text-accent-contrast">
+        <Header />
+        <SideRails />
+        <main className="mx-auto max-w-page px-6 pb-14">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/:slug" element={<ProjectDetail />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <Footer />
+        <RunningCat />
+      </div>
+    </BrowserRouter>
   );
 }

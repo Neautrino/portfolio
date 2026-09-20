@@ -1,4 +1,5 @@
 import { useEffect, useState, type MouseEvent } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { profile } from '../content/profile';
 
 const SECTIONS = [
@@ -19,7 +20,7 @@ const SWAP_PX = 50;
 export function Header() {
   const [solid, setSolid] = useState(false);
   const [active, setActive] = useState<string>(SECTIONS[0].id);
-  const path = typeof window === 'undefined' ? '/' : window.location.pathname;
+  const path = useLocation().pathname;
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > SWAP_PX);
@@ -68,12 +69,9 @@ export function Header() {
       }`}
     >
       <div className="mx-auto grid max-w-[1320px] grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 px-6 max-[639px]:flex max-[639px]:justify-between">
-        <a
-          href="/"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'auto' });
-          }}
+        <Link
+          to="/"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}
           className="col-start-1 flex items-center gap-[9px] justify-self-start text-text transition-colors hover:text-accent"
           aria-label={`${profile.name} — home`}
         >
@@ -81,7 +79,7 @@ export function Header() {
           <span className="font-mono text-base font-medium whitespace-nowrap">
             <span className="text-accent">~/</span>neautrino
           </span>
-        </a>
+        </Link>
 
         <nav className="col-start-2 justify-self-center max-[639px]:hidden" aria-label="Sections">
           <ul className="flex items-center gap-4 min-[1200px]:gap-5">
@@ -90,7 +88,7 @@ export function Header() {
               return (
                 <li key={id}>
                   <a
-                    href={`#${id}`}
+                    href={path === '/' ? `#${id}` : `/#${id}`}
                     onClick={(e) => onNavClick(e, id)}
                     aria-current={here ? 'true' : undefined}
                     className={`flex items-baseline font-mono text-[11px] tracking-[0.06em] uppercase transition-colors hover:text-accent min-[1200px]:gap-[7px] min-[1200px]:text-[10.5px] min-[1200px]:tracking-[0.16em] ${
@@ -120,15 +118,15 @@ export function Header() {
                     key={href}
                     className={i > 0 ? "before:mr-2.5 before:text-dim before:content-['·']" : ''}
                   >
-                    <a
-                      href={href}
+                    <Link
+                      to={href}
                       aria-current={here ? 'page' : undefined}
                       className={`border-b whitespace-nowrap text-text transition-colors hover:border-accent hover:text-accent ${
                         here ? 'border-border-strong' : 'border-transparent'
                       }`}
                     >
                       {label}
-                    </a>
+                    </Link>
                   </li>
                 );
               })}
