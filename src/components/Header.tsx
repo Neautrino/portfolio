@@ -136,6 +136,8 @@ export function Header() {
           {profile.resumeUrl ? (
             <a
               href={profile.resumeUrl}
+              target="_blank"
+              rel="noreferrer"
               className="hidden rounded-sm border border-border-strong px-3 py-[7px] font-mono text-[10.5px] tracking-[0.14em] whitespace-nowrap text-accent uppercase transition-colors hover:border-accent hover:bg-surface-2 min-[1200px]:inline-block"
             >
               résumé

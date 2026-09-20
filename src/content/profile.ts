@@ -5,7 +5,7 @@ export const profile: Profile = {
   role: 'Software Engineer',
   location: 'India',
   email: 'ssubhendu988@gmail.com',
-  resumeUrl: '/resume.pdf',
+  resumeUrl: 'https://drive.google.com/file/d/1t4fX7uIPUqyiLhS6KIGUdukeggADESTh/view?usp=sharing',
   availability: 'Open to interesting backend, systems, full-stack, web3, and AI conversations.',
 
   heroLede:

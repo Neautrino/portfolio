@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { profile } from '../content/profile';
 import { Section } from './Section';
 import { SleepingCat } from './SleepingCat';
@@ -110,13 +111,13 @@ export function Contact() {
               </li>
             ))}
           <li>
-            <a
-              href="#blog"
+            <Link
+              to="/blog"
               className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.1em] text-muted no-underline transition-colors hover:text-accent"
             >
               <TagIcon />
               <span>Technical Blog</span>
-            </a>
+            </Link>
           </li>
         </ul>
 

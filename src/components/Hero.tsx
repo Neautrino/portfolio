@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { CatPeek } from './CatPeek';
 import { profile } from '../content/profile';
 
@@ -103,19 +104,19 @@ export function Hero() {
 
         <div className="mt-[30px] flex flex-wrap justify-center gap-3">
           <a
-            href="#work"
+            href="https://cal.com/neautrino"
+            target="_blank"
+            rel="noreferrer"
             className="rounded-sm border border-accent bg-accent px-5 py-[13px] font-mono text-[11px] tracking-[0.08em] text-accent-contrast transition-colors hover:opacity-90"
           >
-            cat ./work
+            Let's connect ↗
           </a>
-          {profile.resumeUrl ? (
-            <a
-              href={profile.resumeUrl}
-              className="rounded-sm border border-border-strong px-5 py-[13px] font-mono text-[11px] tracking-[0.08em] text-muted transition-colors hover:border-accent-2 hover:text-text"
-            >
-              open résumé
-            </a>
-          ) : null}
+          <Link
+            to="/projects"
+            className="rounded-sm border border-border-strong px-5 py-[13px] font-mono text-[11px] tracking-[0.08em] text-muted transition-colors hover:border-accent-2 hover:text-text"
+          >
+            Projects
+          </Link>
         </div>
       </div>
     </section>
