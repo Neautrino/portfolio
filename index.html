@@ -2,7 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!--
+      Favicons. `sizes="32x32"` on the .ico is deliberate: without it Chrome
+      may download both and prefer the raster over the SVG. The .ico also
+      answers bare GET /favicon.ico from scrapers and feeds Google Search,
+      which does not consume SVG.
+    -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f0f2fa" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#161620" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Subhendu Singh | Software Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
