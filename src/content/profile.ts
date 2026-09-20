@@ -21,6 +21,7 @@ export const profile: Profile = {
   socials: [
     { label: 'GitHub', href: 'https://github.com/neautrino' },
     { label: 'LinkedIn', href: 'https://linkedin.com/in/subhendu-singh' },
+    { label: 'X', href: 'https://x.com/Neautrino_08' },
     { label: 'Email', href: 'mailto:ssubhendu988@gmail.com' },
   ],
 
