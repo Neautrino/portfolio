@@ -25,61 +25,67 @@ export function ProjectDetail() {
         ← All Projects
       </Link>
 
-      <div className="flex items-center gap-2.5 font-mono text-[11px] tracking-[0.16em] text-dim uppercase">
-        <span className={`inline-flex items-center gap-1.5 ${STATUS_TONE[project.status]}`}>
-          <span className="size-[5px] rounded-full bg-current" aria-hidden="true" />
-          {project.status}
-        </span>
-        <span aria-hidden="true">·</span>
-        <span className="tabular-nums">{project.date}</span>
-      </div>
+      <div
+        className={`grid grid-cols-1 gap-x-10 gap-y-8 ${project.image ? 'lg:grid-cols-[1.1fr_1fr] lg:items-start' : ''}`}
+      >
+        <div>
+          <div className="flex items-center gap-2.5 font-mono text-[11px] tracking-[0.16em] text-dim uppercase">
+            <span className={`inline-flex items-center gap-1.5 ${STATUS_TONE[project.status]}`}>
+              <span className="size-[5px] rounded-full bg-current" aria-hidden="true" />
+              {project.status}
+            </span>
+            <span aria-hidden="true">·</span>
+            <span className="tabular-nums">{project.date}</span>
+          </div>
 
-      <h1 className="mt-3 font-display text-4xl font-normal tracking-tight text-text sm:text-5xl">
-        {project.title}
-      </h1>
+          <h1 className="mt-3 font-display text-4xl font-normal tracking-tight text-text sm:text-5xl">
+            {project.title}
+          </h1>
 
-      <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-muted">{project.tagline}</p>
+          <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-muted">{project.tagline}</p>
 
-      {project.image ? (
-        <img
-          src={project.image}
-          alt={project.imageAlt}
-          className="mt-8 w-full rounded-sm border border-border-strong"
-          loading="lazy"
-        />
-      ) : null}
+          <ul className="mt-6 flex list-none flex-wrap gap-1.5">
+            {project.stack.map((tool) => (
+              <li
+                key={tool}
+                className="rounded-full border border-border/65 bg-surface-2/55 px-2.5 py-1 font-mono text-[10.5px] tracking-[0.06em] text-muted"
+              >
+                {tool}
+              </li>
+            ))}
+          </ul>
 
-      <ul className="mt-6 flex list-none flex-wrap gap-1.5">
-        {project.stack.map((tool) => (
-          <li
-            key={tool}
-            className="rounded-full border border-border/65 bg-surface-2/55 px-2.5 py-1 font-mono text-[10.5px] tracking-[0.06em] text-muted"
-          >
-            {tool}
-          </li>
-        ))}
-      </ul>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {project.liveUrl ? (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-sm border border-accent bg-accent px-5 py-[13px] font-mono text-[11px] tracking-[0.08em] text-accent-contrast transition-colors hover:opacity-90"
+              >
+                live ↗
+              </a>
+            ) : null}
+            {project.repoUrl ? (
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-sm border border-border-strong px-5 py-[13px] font-mono text-[11px] tracking-[0.08em] text-muted transition-colors hover:border-accent-2 hover:text-text"
+              >
+                source ↗
+              </a>
+            ) : null}
+          </div>
+        </div>
 
-      <div className="mt-6 flex flex-wrap gap-3">
-        {project.liveUrl ? (
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-sm border border-accent bg-accent px-5 py-[13px] font-mono text-[11px] tracking-[0.08em] text-accent-contrast transition-colors hover:opacity-90"
-          >
-            live ↗
-          </a>
-        ) : null}
-        {project.repoUrl ? (
-          <a
-            href={project.repoUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-sm border border-border-strong px-5 py-[13px] font-mono text-[11px] tracking-[0.08em] text-muted transition-colors hover:border-accent-2 hover:text-text"
-          >
-            source ↗
-          </a>
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={project.imageAlt}
+            className="w-full rounded-sm border border-border-strong lg:sticky lg:top-24"
+            loading="lazy"
+          />
         ) : null}
       </div>
 
