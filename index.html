@@ -13,15 +13,17 @@
     />
     <!--
       Cloudflare Web Analytics (real unique-visitor tracking, no cookies).
+      Token comes from VITE_CF_BEACON_TOKEN (see .env.example) so it's
+      never hardcoded in source. Empty/unset -> Cloudflare's beacon script
+      no-ops silently, so this stays inert until the env var is set.
       1. Deploy this site to Cloudflare Workers/Pages first (needs a live domain).
       2. Dashboard -> your project -> Analytics -> Web Analytics -> Enable.
-      3. Cloudflare gives you a token; paste it below, replacing PASTE_TOKEN_HERE.
-      Until replaced, this script is inert (Cloudflare rejects unknown tokens).
+      3. Set VITE_CF_BEACON_TOKEN in your deploy environment (and/or local .env).
     -->
     <script
       defer
       src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token": "PASTE_TOKEN_HERE"}'
+      data-cf-beacon='{"token": "%VITE_CF_BEACON_TOKEN%"}'
     ></script>
   </head>
   <body>
