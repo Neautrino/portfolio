@@ -63,3 +63,99 @@
     pointer-events: none;
   }
 }
+
+/* Cat entrance:
+   1. Paw 1 reaches up slowly from below, arcs OVER the table edge, and plants down (clamping the ledge).
+   2. Paw 2 follows ~200ms later with the same reaching arc and plants down.
+   3. Cat cautiously pulls itself up: head + glowing eyes rise slowly, pause, then peak with a slight curious tilt. */
+
+@keyframes cat-paw-left-plant {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) rotate(-14deg);
+  }
+  25% {
+    opacity: 1;
+  }
+  65% {
+    /* Reaches up higher than the ledge before placing down */
+    transform: translateY(-8px) rotate(4deg);
+  }
+  85% {
+    /* Hits the ledge with a tiny compression bounce */
+    transform: translateY(2px) rotate(-1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes cat-paw-right-plant {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) rotate(14deg);
+  }
+  25% {
+    opacity: 1;
+  }
+  65% {
+    /* Reaches up higher than the ledge before placing down */
+    transform: translateY(-8px) rotate(-4deg);
+  }
+  85% {
+    /* Hits the ledge with a tiny compression bounce */
+    transform: translateY(2px) rotate(1deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes cat-head-curious-peek {
+  0% {
+    opacity: 0;
+    transform: translateY(125px);
+  }
+  20% {
+    opacity: 1;
+  }
+  70% {
+    /* Peeks up slowly, slightly higher than resting */
+    transform: translateY(-4px);
+  }
+  85% {
+    /* Settles down onto the ledge */
+    transform: translateY(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cat-paw-left {
+  transform-origin: 300px 400px;
+  animation: cat-paw-left-plant 900ms cubic-bezier(0.22, 1, 0.36, 1) 400ms both;
+}
+
+.cat-paw-right {
+  transform-origin: 850px 400px;
+  animation: cat-paw-right-plant 900ms cubic-bezier(0.22, 1, 0.36, 1) 620ms both;
+}
+
+.cat-head-rise {
+  transform-origin: 575px 340px;
+  animation: cat-head-curious-peek 1200ms cubic-bezier(0.25, 1, 0.5, 1) 1200ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cat-paw-left,
+  .cat-paw-right,
+  .cat-head-rise {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

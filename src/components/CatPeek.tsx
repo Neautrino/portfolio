@@ -78,9 +78,9 @@ export function CatPeek() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute right-5 bottom-[45px] hidden h-[126px] w-[300px] min-[860px]:block"
+      className="pointer-events-none absolute right-5 bottom-[49.5px] hidden h-[120px] w-[300px] overflow-hidden min-[860px]:block"
     >
-      <svg viewBox="0 0 1000 420" className="block h-full w-full overflow-visible">
+      <svg viewBox="0 0 1000 400" className="block h-full w-full">
         <defs>
           <filter id="catEyeGlow" x="-30%" y="-30%" width="160%" height="160%">
             <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur" />
@@ -99,6 +99,7 @@ export function CatPeek() {
 
         {/* Head silhouette with cheek tufts and alert ears */}
         <path
+          className="cat-head-rise"
           fill="var(--color-bg)"
           stroke="var(--color-muted)"
           strokeWidth="2.5"
@@ -113,6 +114,7 @@ export function CatPeek() {
 
         {/* Left paw gripping the terminal ledge */}
         <path
+          className="cat-paw-left"
           fill="var(--color-bg)"
           stroke="var(--color-muted)"
           strokeWidth="2.5"
@@ -122,8 +124,8 @@ export function CatPeek() {
              C 380 348, 380 375, 375 400"
         />
 
-        {/* Right paw gripping the terminal ledge */}
         <path
+          className="cat-paw-right"
           fill="var(--color-bg)"
           stroke="var(--color-muted)"
           strokeWidth="2.5"
@@ -134,7 +136,7 @@ export function CatPeek() {
         />
 
         {/* Left eye: glowing iris ring + cursor-tracking pupil */}
-        <g ref={leftEyeRef}>
+        <g ref={leftEyeRef} className="cat-head-rise">
           <circle
             cx="505"
             cy="340"
@@ -156,7 +158,7 @@ export function CatPeek() {
         </g>
 
         {/* Right eye: glowing iris ring + cursor-tracking pupil */}
-        <g ref={rightEyeRef}>
+        <g ref={rightEyeRef} className="cat-head-rise">
           <circle
             cx="660"
             cy="340"
