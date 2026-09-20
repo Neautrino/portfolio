@@ -1,73 +1,66 @@
-# React + TypeScript + Vite
+# Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio for Subhendu Singh — Vite + React + TypeScript + Tailwind CSS v4, deployed on Cloudflare Workers.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Vite + React 19 + TypeScript** — static SPA, no SSR
+- **Tailwind CSS v4** — theme tokens in `src/index.css` (`@theme`)
+- **react-router-dom** — client-side routing (`/`, `/projects`, `/projects/:slug`, `/blog`)
+- **Markdown-driven projects** — `src/content/projects/*.md`, parsed at build time via a custom Vite plugin (`vite-plugins/markdown-content.ts`) into typed `Project` objects; no markdown parser ships to the browser
+- **Cloudflare Workers** — static assets (`dist/`) plus one small Worker route (`src/worker.ts`) backing a real, KV-based unique-visitor counter at `/api/visitors`
 
-## React Compiler
+## Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+bun install
+bun run dev       # Vite dev server
+bun run build     # typecheck + production build to dist/
+bun run lint      # eslint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+To test the `/api/visitors` Worker route locally (needs a real KV namespace bound in `wrangler.toml`):
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npx wrangler dev --remote --port 8787
 ```
+
+`--remote` runs against your real Cloudflare KV namespace instead of a local simulation — use `--local` instead if you want to test the increment/dedup logic without touching real data.
+
+## Adding a project
+
+Drop a new markdown file in `src/content/projects/`, e.g. `my-project.md`:
+
+```markdown
+---
+title: "My Project"
+tagline: "One line describing what it does."
+date: "Jan 2026"
+status: shipped        # shipped | building | archived
+highlights:
+  - "A notable technical detail"
+stack: [TypeScript, Postgres]
+liveUrl: "https://example.com"    # optional
+repoUrl: "https://github.com/..." # optional
+image: "/projects/my-project.png" # optional, put the file in public/projects/
+imageAlt: "..."                   # required if image is set
+featured: true
+order: 3
+---
+
+## The problem
+...
+
+## What I built
+...
+```
+
+Frontmatter is validated at build time — a missing/malformed field fails the build with a clear error instead of shipping a broken card.
+
+## Deployment
+
+Deployed via Cloudflare Workers (Git integration — push to `main`, Cloudflare builds and deploys automatically). Config lives in `wrangler.toml`:
+
+- `[assets]` serves `dist/` as static files, with `not_found_handling = "single-page-application"` so client-side routes work on direct load/refresh.
+- `run_worker_first = ["/api/*"]` means only requests to `/api/*` invoke the Worker script; everything else is served directly from the edge with zero compute cost.
+- `[[kv_namespaces]]` binds the `PORTFOLIO_VISITORS_KV` namespace for the visitor counter.

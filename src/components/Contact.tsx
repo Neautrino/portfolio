@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { profile } from '../content/profile';
 import { Section } from './Section';
 import { SleepingCat } from './SleepingCat';
+import { VisitorTicker } from './VisitorTicker';
 
 function GitBranchIcon() {
   return (
@@ -120,6 +121,9 @@ export function Contact() {
             </Link>
           </li>
         </ul>
+
+        {/* Split-Flap Visitor Ticker */}
+        <VisitorTicker />
 
         {/* Sleeping cat, pulled out of flow so it reserves no layout space;
             offset down past Section's pb-18 (72px) and main's pb-14 (56px)

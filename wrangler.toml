@@ -1,7 +1,18 @@
 name = "portfolio"
 compatibility_date = "2026-09-20"
+main = "src/worker.ts"
 
 [assets]
 directory = "./dist"
-
+binding = "ASSETS"
+# Serve index.html for any path that isn't a real file, so client-side
+# routes (e.g. /projects/cerebro) work on direct load/refresh.
 not_found_handling = "single-page-application"
+# Only /api/* invokes the Worker script below; every other request is
+# served directly from static assets with zero compute cost.
+run_worker_first = ["/api/*"]
+
+[[kv_namespaces]]
+binding = "VISITOR_KV"
+# PORTFOLIO_VISITORS_KV in the Cloudflare dashboard
+id = "33032a8a2a4a4ea9b11cd4a36a668bad"
