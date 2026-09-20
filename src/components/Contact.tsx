@@ -62,7 +62,7 @@ function TagIcon() {
 export function Contact() {
   return (
     <Section id="contact" num="04" title="Contact">
-      <div className="flex w-full flex-col">
+      <div className="relative flex w-full flex-col">
         {/* Closing Headline */}
         <h3 className="font-display text-4xl font-normal leading-[1.12] tracking-tight text-text sm:text-5xl">
           Have something amazing on mind!
@@ -120,8 +120,10 @@ export function Contact() {
           </li>
         </ul>
 
-        {/* Sleeping cat, right above the footer's divider line */}
-        <SleepingCat className="relative mt-10 self-end" />
+        {/* Sleeping cat, pulled out of flow so it reserves no layout space;
+            offset down past Section's pb-18 (72px) and main's pb-14 (56px)
+            so its paws land exactly on the footer's divider line below. */}
+        <SleepingCat className="absolute right-0 bottom-[-128px]" />
 
       </div>
     </Section>
