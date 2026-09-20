@@ -3,18 +3,9 @@ export function Footer() {
 
   return (
     <footer className="relative w-full overflow-hidden border-t border-border bg-bg px-6 pt-4 sm:px-12">
-      {/* Top Metadata Row: Copyright, Visitor Badge, Back to Top */}
+      {/* Top Metadata Row: Copyright, Back to Top */}
       <div className="mx-auto flex max-w-page flex-wrap items-center justify-between gap-4 font-mono text-xs text-muted">
         <span>© {currentYear} neautrino. All rights reserved.</span>
-
-        <img
-          src="https://hits.sh/github.com/neautrino.svg?style=flat-square&label=visitors&color=6b7280&labelColor=44403c"
-          alt="Unique visitors counter"
-          width={68}
-          height={20}
-          className="opacity-80"
-        />
-
         <a
           href="#top"
           onClick={(e) => {
