@@ -11,6 +11,8 @@ stack: [Next.js, TypeScript, Convex, Clerk, Gemini, Tailwind]
 liveUrl: "https://cerebro-theta.vercel.app"
 repoUrl: "https://github.com/Neautrino/Cerebro"
 featured: true
+image: "/projects/cerebro.png"
+imageAlt: "Cerebro's landing page: 'Your Second Brain for Better Thinking' hero with Get Started and Learn More buttons"
 order: 1
 ---
 
