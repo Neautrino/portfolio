@@ -1,4 +1,6 @@
+import { useId, useRef, useState, type KeyboardEvent } from 'react';
 import { experiences } from '../content/experience';
+import type { ExperienceProject } from '../content/types';
 import { Section } from './Section';
 
 function PinIcon() {
@@ -34,6 +36,93 @@ function BriefcaseIcon() {
       <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
       <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
     </svg>
+  );
+}
+
+function Highlights({ items }: { items: string[] }) {
+  return (
+    <ul className="mt-3.5 space-y-2.5 list-none p-0 m-0">
+      {items.map((point, i) => (
+        <li
+          key={i}
+          className="relative pl-4 text-[13px] leading-[20px] text-muted before:absolute before:left-0 before:top-2 before:size-1 before:rounded-full before:bg-accent-2 [&_strong]:font-semibold [&_strong]:text-text"
+          dangerouslySetInnerHTML={{ __html: point }}
+        />
+      ))}
+    </ul>
+  );
+}
+
+const STATUS = {
+  production: { label: 'prod', tone: 'text-accent-2' },
+  development: { label: 'dev', tone: 'text-accent' },
+} as const;
+
+/** WAI-ARIA tabs: every panel stays in the DOM (hidden) so crawlers and ATS parsers read all of them. */
+function ProjectTabs({ projects }: { projects: ExperienceProject[] }) {
+  const id = useId();
+  const [active, setActive] = useState(0);
+  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  function onKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+    if (step === 0) return;
+    event.preventDefault();
+    const next = (active + step + projects.length) % projects.length;
+    setActive(next);
+    tabs.current[next]?.focus();
+  }
+
+  return (
+    <>
+      <div role="tablist" className="mt-4 flex border-b border-border" onKeyDown={onKeyDown}>
+        {projects.map((project, i) => {
+          const selected = i === active;
+          const status = STATUS[project.status];
+          return (
+            <button
+              key={project.name}
+              ref={(el) => {
+                tabs.current[i] = el;
+              }}
+              type="button"
+              role="tab"
+              id={`${id}-tab-${i}`}
+              aria-selected={selected}
+              aria-controls={`${id}-panel-${i}`}
+              tabIndex={selected ? 0 : -1}
+              onClick={() => setActive(i)}
+              className={`-mb-px flex cursor-pointer items-center gap-2.5 border-b-2 px-3.5 pt-2 pb-[9px] text-[13.5px] font-medium transition-colors ${
+                selected ? 'border-accent text-text' : 'border-transparent text-muted hover:text-text'
+              }`}
+            >
+              {project.name}
+              <span
+                className={`inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.12em] uppercase before:size-[5px] before:rounded-full before:bg-current ${status.tone}`}
+              >
+                {status.label}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {projects.map((project, i) => (
+        <div
+          key={project.name}
+          role="tabpanel"
+          id={`${id}-panel-${i}`}
+          aria-labelledby={`${id}-tab-${i}`}
+          hidden={i !== active}
+          className="pt-3.5"
+        >
+          <p className="font-mono text-[11px] text-dim">
+            {[project.summary, ...project.stack].join(' · ')}
+          </p>
+          <Highlights items={project.highlights} />
+        </div>
+      ))}
+    </>
   );
 }
 
@@ -74,15 +163,11 @@ export function Experience() {
                 {job.role}
               </h3>
 
-              <ul className="mt-3.5 space-y-2.5 list-none p-0 m-0">
-                {job.highlights.map((point, i) => (
-                  <li
-                    key={i}
-                    className="relative pl-4 text-[13px] leading-[20px] text-muted before:absolute before:left-0 before:top-2 before:size-1 before:rounded-full before:bg-accent-2 [&_strong]:font-semibold [&_strong]:text-text"
-                    dangerouslySetInnerHTML={{ __html: point }}
-                  />
-                ))}
-              </ul>
+              {'projects' in job ? (
+                <ProjectTabs projects={job.projects} />
+              ) : (
+                <Highlights items={job.highlights} />
+              )}
 
               <ul className="mt-5 flex list-none flex-wrap gap-1.5 p-0">
                 {job.stack.map((tech) => (

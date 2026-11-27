@@ -8,15 +8,28 @@ export interface SkillGroup {
   items: string[];
 }
 
-export interface ExperienceEntry {
+export interface ExperienceProject {
+  name: string;
+  /** one-line description shown above the bullets, e.g. "Fintech payments platform" */
+  summary: string;
+  status: 'production' | 'development';
+  stack: string[];
+  highlights: string[];
+}
+
+interface ExperienceBase {
   company: string;
   role: string;
   period: string;
   location: string;
   engagement: string;
-  highlights: string[];
   stack: string[];
 }
+
+/** A job lists its bullets directly, or groups them per product (rendered as tabs). */
+export type ExperienceEntry =
+  | (ExperienceBase & { highlights: string[] })
+  | (ExperienceBase & { projects: ExperienceProject[] });
 
 export type ProjectStatus = 'shipped' | 'building' | 'archived';
 
