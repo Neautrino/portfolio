@@ -13,7 +13,7 @@ repoUrl: "https://github.com/Neautrino/Cerebro"
 featured: true
 image: "/projects/cerebro.png"
 imageAlt: "Cerebro's landing page: 'Your Second Brain for Better Thinking' hero with Get Started and Learn More buttons"
-order: 1
+order: 3
 ---
 
 ## The problem

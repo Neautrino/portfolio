@@ -13,7 +13,7 @@ repoUrl: "https://github.com/Neautrino/Code-Craft"
 featured: true
 image: "/projects/code-craft.png"
 imageAlt: "Code Craft's editor showing a JavaScript playground snippet with array methods, next to an empty output panel"
-order: 2
+order: 4
 ---
 
 ## The problem

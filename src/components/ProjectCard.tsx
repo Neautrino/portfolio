@@ -10,7 +10,19 @@ const STATUS_TONE: Record<ProjectStatus, string> = {
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <li className="flex">
-      <article className="group relative flex h-full w-full flex-col gap-3 rounded-tl-[10px] border-t-2 border-l-2 border-border bg-surface/72 px-5 pt-5 pb-[22px] shadow-[9px_9px_0_-2px_--alpha(var(--color-accent)/16%)] transition-[transform,border-color,box-shadow] duration-[260ms] ease-fluid hover:-translate-x-[3px] hover:-translate-y-[3px] hover:border-accent/70 hover:shadow-[13px_13px_0_-2px_--alpha(var(--color-accent)/34%)]">
+      <article className="group relative flex h-full w-full flex-col gap-3 overflow-hidden rounded-tl-[10px] border-t-2 border-l-2 border-border bg-surface/72 px-5 pt-5 pb-[22px] shadow-[9px_9px_0_-2px_--alpha(var(--color-accent)/16%)] transition-[transform,border-color,box-shadow] duration-[260ms] ease-fluid hover:-translate-x-[3px] hover:-translate-y-[3px] hover:border-accent/70 hover:shadow-[13px_13px_0_-2px_--alpha(var(--color-accent)/34%)]">
+        {project.image ? (
+          // decorative here: the title link names the card, the detail page carries imageAlt
+          <div className="-mx-5 -mt-5 mb-2 aspect-[16/9] overflow-hidden border-b border-border">
+            <img
+              src={project.image}
+              alt=""
+              loading="lazy"
+              className="block size-full object-cover object-top opacity-80 saturate-[0.85] transition-[opacity,transform,filter] duration-[400ms] ease-fluid group-hover:scale-[1.025] group-hover:opacity-100 group-hover:saturate-100"
+            />
+          </div>
+        ) : null}
+
         <div className="flex items-center gap-2.5 font-mono text-[10px] tracking-[0.18em] text-dim uppercase">
           <span>{String(index + 1).padStart(2, '0')}</span>
           <span className={`inline-flex items-center gap-1.5 ${STATUS_TONE[project.status]}`}>
